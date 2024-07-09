@@ -1,0 +1,67 @@
+{
+  "sections": {
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "settings": {
+        "sw": false,
+        "hidemb": false,
+        "tc": false
+      }
+    },
+    "main": {
+      "type": "main-cart",
+      "settings": {
+        "layout": "2",
+        "pagewidth": 1300,
+        "display_saving": true,
+        "shippingTax": false,
+        "additionalCheckout": true,
+        "checkout-btn": "btn1",
+        "cartCount": true,
+        "countTime": 30,
+        "countMsg": "Please, hurry! Someone has placed an order with same products. These products are limited, checkout within [time]",
+        "txtcl": "#333333",
+        "txtbg": "#d6eadf",
+        "shipCalc": true,
+        "shipTtl": "Get Shipping Estimates",
+        "default_country": "United States",
+        "shipping-btn": "btn1",
+        "sst": 20,
+        "ssb": 20,
+        "sstm": 10,
+        "ssbm": 10
+      }
+    },
+    "recommanded": {
+      "type": "product-recommendations",
+      "settings": {
+        "title": "Recommended Products",
+        "subtitle": "",
+        "grid": 4,
+        "gridtb": 3,
+        "gridmb": 2,
+        "limit": 5,
+        "carousel": true,
+        "autoplay": false,
+        "speed": 5,
+        "arrow": true,
+        "arrowm": true,
+        "dot": false,
+        "dotm": false,
+        "sst": 0,
+        "ssb": 30,
+        "sstm": 15,
+        "ssbm": 15,
+        "bg": "",
+        "bgg": "",
+        "sw": false,
+        "hidem": false
+      }
+    }
+  },
+  "order": [
+    "breadcrumb",
+    "main",
+    "recommanded"
+  ]
+}

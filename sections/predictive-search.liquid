@@ -1,0 +1,17 @@
+{% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+{%- if predictive_search.performed -%}
+    <ul id="predictive-search-results-list" class="grid predictive-search__results-list list-unstyled" aria-labelledby="predictive-search-products">
+      {%- for product in predictive_search.resources.products -%}
+        <li class="gitem fl1 productCol">{% render 'product-card-columns',product:product  %}</li>
+      {%- endfor -%}
+    </ul>
+    {%- if predictive_search.resources.products.size > 0 -%}
+    <a class="fl f-aic f-jcsb moreItem" href="{{ routes.search_url }}?q={{ predictive_search.terms }}&options%5Bprefix%5D=none&options%5Bprefix%5D=last">
+        {{ 'general.search.all' | t: terms: predictive_search.terms }} 
+       <svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" class="at-icon icon-arrow ml5 arwl right" style="height:10px" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor"></path></svg>
+    </a>
+    {%- endif -%}  
+    {%- if predictive_search.resources.products.size == 0 -%}
+      <p class="noResult">{{ 'general.search.no_results_html' | t: terms: predictive_search.terms }}</p>
+    {%- endif -%}
+{%- endif -%}

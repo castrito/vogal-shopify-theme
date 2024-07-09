@@ -1,0 +1,28 @@
+{%- assign all_my_products = collections['all'].products %}
+{% paginate collections['all'].products by '1000' %}
+    {% for tmp_product in collections['all'].products %}
+    	{% if tmp_product.handle == slproduct %}
+        	{%- assign product = tmp_product -%}
+            {% break %}
+		{% endif %}
+    {% endfor %}
+{% endpaginate %}
+<div class="lb_shop fl f-aic {{ postion }}{% unless product.available %} sold-out{% endunless %}">
+    <a class="lb_img" href="{{ product.url | within: collection }}">
+      <div class="grid_img lazyload{% if secondImg and product.images.size > 1 %} primary{% endif %}" data-bgset="{% render 'prgrid-img', image: product.featured_image, sizes:'100,200,300,400' %}" data-sizes="auto" data-parent-fit="contain"></div>
+    </a>
+
+  <div class="details fl1 ml15">
+    {% if settings.show_vendor %}<div class="grid_vendor hide">{{ product.vendor }}</div>{% endif %}
+    <a href="{{ product.url | within: collection }}" class="grid_title">{{ product.title }}</a>
+    {% unless settings.catalogmode %}
+      <div class="grid_meta">{% render 'product-price', product: product %}</div>
+      {% assign variantCount = product.variants | size %}
+      {% if variantCount > 1 %}
+          <a class="btn {{ section.settings.btn-style }} mt5 btn--small btn-options" href="{{ product.url | within: collection }}">{{ 'products.product.select_options' | t }}</a>                  	
+      {% else %}
+          <a class="btn {{ section.settings.btn-style }} mt5 btn--small add-to-cart" href="javascript:void(0);" id="{{ product.variants.first.id }}" rel="1">{{ 'products.product.add_to_cart' | t }}</a>
+      {% endif %}
+    {% endunless %}
+  </div>
+</div>

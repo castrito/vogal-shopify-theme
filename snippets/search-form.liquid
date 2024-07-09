@@ -1,0 +1,41 @@
+<form action="{{ routes.search_url }}" method="get" class="search pr {{ frmClas }} {% if search-form == "solid-search" %}solid-search{% endif %}" role="search">	
+    <div class="ad_inputs fl">
+        <input type="hidden" name="type" value="product" />
+        <input name="options[prefix]" type="hidden" value="last">
+        <input class="s_input w_100" type="search" name="q" placeholder="{{ settings.search_ph }}" value="{{ search.terms | escape }}" autocomplete="off" />
+        <button class="btn s_submit" type="submit">{% render 'icon-search' %} <span class="fallback_txt">{{ 'general.search.submit' | t }}</span></button>
+    </div>
+    {% if search-form == "close" %} 
+        <a class="closeSearch" href="#">{% render 'icon-close' %}</a>
+    {% endif %}
+
+   
+        {% if frmClas != 'drawer' %}<div class="s_res pa w_100" >{% else %}<br />{% endif %}
+            
+			{% if settings.search_sugges %}<div id="serchList" class="fl f-wrap f-jcs w_100" style="display:none;"></div> {% endif %}
+            
+            {% if settings.search_word != blank or settings.searchCl != blank %}
+                <div id="searchPre">
+                    {% if settings.search_word != blank  %}
+                        {% assign searchwords = settings.search_word | replace:", ","," | replace:" , ","," | replace:" ,","," | split: ',' %}  	
+                        <div class="s_suggestion{% if settings.searchCl != blank %} mb25{% endif %}">
+                            <h3 class="fwm mb10">{{ settings.search_lbl1 }}</h3>
+                            {% for searchvalue in searchwords %}<a class="mr15" href="{{ routes.search_url }}?type=product&options%5Bprefix%5D=none&q={{ searchvalue }}&options%5Bprefix%5D=last"><u>{{ searchvalue }}</u></a>{% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {%- assign collection = collections[settings.searchCl] -%}
+                    {% if collection.products.size > 0 %}
+                        <h3 class="fwm">{{ settings.search_lbl2 }}</h3>
+                        <ul id="predictive-search-results-list" class="grid gspace mb20" aria-labelledby="{{ settings.search_lbl2 }}">
+                            {% for product in collection.products limit: settings.limit %}
+                                <li class="gitem fl1 productCol">{% render 'product-card-columns', product: product, section: section.settings %}</li>
+                            {% endfor %}
+                        </ul>  
+                      <p class="tc">{% if settings.btntxt != blank %} <a href="{{ settings.searchCl.url }}" class="btn {{ settings.sbtn-size }} {{ settings.sbtn-style }}">{{ settings.btntxt }}</a>{%  endif %}</p>           
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% if frmClas != 'drawer' %}</div>{% endif %}
+	
+</form>
