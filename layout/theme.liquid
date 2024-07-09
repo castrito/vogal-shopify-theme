@@ -133,5 +133,9 @@
 {%- section 'exit-intent-popup' -%}
 {%- render 'theme-modals', isRtl:isRtl -%}
 <script src="{{ 'script-loader.js' | asset_url }}" defer></script>
+{% if template == 'product' %}
+  <script src="{{ 'custom-script.js' | asset_url }}" defer></script>
+{% endif %}
+
 </body>
 </html>
